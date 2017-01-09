@@ -22,15 +22,30 @@ def get_word_count(file_name):
 
     # goes through each token and strips punctuation and makes lowercase
     # to eliminate doubles, and does dictionary counting
+    max_freq = 0
     exclude = set(string.punctuation)
     for index, word in enumerate(tokens):
         no_punc = "".join(char for char in word if char not in exclude)
         word = no_punc.lower()
         word_count[word] = word_count.get(word, 0) + 1
 
-    # sorts the words by frequency (highest to lowest) then prints the data
-    for word, count in sorted(word_count.items(), key=lambda tup: tup[1], reverse=True):
-        print "%s %d" % (word, count)
+        # checks to see if word is more frequent than others
+        if word_count[word] > max_freq:
+            max_freq = word_count[word]
+
+    # sorts the words by frequency (highest to lowest) then alphabetically
+    # based on the frequency
+    frequency_list = []
+    double_sorted = []
+    frequency_sort = sorted(word_count.items(), key=lambda tup: tup[1], reverse=True)
+    while max_freq > 0:
+        for index, data_pair in enumerate(frequency_sort[::-1]):
+            if data_pair[1] == max_freq:
+                frequency_list.append(data_pair)
+        
+        max_freq -= 1
+
+    print double_sorted
 
 
 get_word_count(input_file)
