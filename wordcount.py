@@ -1,4 +1,5 @@
 # put your code here.
+import string
 
 
 def get_word_count(file_name):
@@ -15,6 +16,13 @@ def get_word_count(file_name):
         # makes one large list of words instead of working line by line
         tokens = tokens + line.split(" ")
 
+    # goes through each token and strips punctuation and makes lowercase
+    # to eliminate doubles
+    exclude = set(string.punctuation)
+    for index, word in enumerate(tokens):
+        no_punc = "".join(char for char in word if char not in exclude)
+        tokens[index] = no_punc.lower()
+
     # looks for each word as a key in the dictionary, creates key if not found
     # increments key's value by one otherwise
     for word in tokens:
@@ -23,6 +31,7 @@ def get_word_count(file_name):
     # iterates through word_count to print out the key-value pairs
     for word, count in word_count.items():
         print "%s %d" % (word, count)
+
 
 #get_word_count("test.txt")
 
@@ -40,6 +49,13 @@ def get_word_count_long(file_name):
 
         # makes one large list of words instead of working line by line
         tokens = tokens + line.split(" ")
+
+    # goes through each token and strips punctuation and makes lowercase
+    # to eliminate doubles
+    exclude = set(string.punctuation)
+    for index, word in enumerate(tokens):
+        no_punc = "".join(char for char in word if char not in exclude)
+        tokens[index] = no_punc.lower()
 
     # looks for each word as a key in the dictionary, creates key if not found
     # increments key's value by one otherwise
