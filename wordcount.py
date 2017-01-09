@@ -28,9 +28,9 @@ def get_word_count(file_name):
         word = no_punc.lower()
         word_count[word] = word_count.get(word, 0) + 1
 
-    # sorts the words by frequency (highest to lowest) then prints the
-    for word in sorted(word_count, key=word_count.get, reverse=True):
-        print "%s %d" % (word, word_count[word])
+    # sorts the words by frequency (highest to lowest) then prints the data
+    for word, count in sorted(word_count.items(), key=lambda tup: tup[1], reverse=True):
+        print "%s %d" % (word, count)
 
 
 get_word_count(input_file)
